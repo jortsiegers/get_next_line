@@ -1,0 +1,8 @@
+.*
+libs
+libs/
+libs/*
+tmp
+*.o
+*.a
+!.gitignore
