@@ -6,7 +6,7 @@
 #    By: jsiegers <jsiegers@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/07/25 00:22:23 by jsiegers      #+#    #+#                  #
-#    Updated: 2022/01/08 08:37:54 by jsiegers         ###   ########.fr        #
+#    Updated: 2022/01/08 09:37:19 by jsiegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,9 @@ LIBS	=
 SRCS	= get_next_line.c get_next_line_utils.c
 OBJS	= ${SRCS:.c=.o}
 NAME	= get_next_line.a
-ILINE	= ${addprefix -Ilibs/, ${LIBS}}
-LIBP	= ${join ${addprefix libs/, ${LIBS}},${addsuffix .a, ${addprefix /, ${LIBS}}}}
 
 .c.o:
-	gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 -c ${ILINE} $< -o ${<:.c=.o}
+	gcc -Wall -Wextra -Werror -D BUFFER_SIZE=42 -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJS}
 	@rm -rf tmp
