@@ -6,7 +6,7 @@
 #    By: jsiegers <jsiegers@student.codam.nl>         +#+                      #
 #                                                    +#+                       #
 #    Created: 2021/07/25 00:22:23 by jsiegers      #+#    #+#                  #
-#    Updated: 2022/01/07 21:21:01 by jsiegers         ###   ########.fr        #
+#    Updated: 2022/01/08 08:37:54 by jsiegers         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,27 +38,34 @@ ${NAME}: ${OBJS}
 all: ${NAME}
 
 clone:
+	@rm -rf libs
 	@for lib in ${LIBS};\
 	do\
-		git clone git@github.com:jortsiegers/$${lib}.git libs/$$lib > /dev/null 2>&1;\
-		cd libs/$${lib} && make clone > /dev/null 2>&1;\
 		echo Cloning $${lib}...;\
+		git clone git@github.com:jortsiegers/$${lib}.git libs/$$lib > /dev/null 2>&1;\
+		rm -rf libs/$${lib}/.git;\
+		cd libs/$${lib} && make clone > /dev/null 2>&1;\
+		cd ../..;\
 	done
 
 clean:
 	@for lib in ${LIBS};\
 	do\
+		echo Cleaning $${lib}...;\
 		cd libs/$${lib} && make clean > /dev/null 2>&1;\
+		cd ../..;\
 	done
-	@echo Cleaning ${NAME}...;
+	@echo Cleaning ${NAME}...
 	@rm -f ${OBJS}
 
 fclean:
 	@for lib in ${LIBS};\
 	do\
+		echo FCleaning $${lib}...;\
 		cd libs/$${lib} && make fclean > /dev/null 2>&1;\
+		cd ../..;\
 	done
-	@echo FCleaning ${NAME}...;
+	@echo FCleaning ${NAME}...
 	@rm -f ${OBJS}
 	@rm -f ${NAME}
 
